@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import {
   createBrowserRouter,
@@ -9,15 +7,23 @@ import {
   Outlet,
   RouterProvider,
 } from 'react-router-dom'
-import { Home } from './pages/Home'
+import { Home } from './pages/Home/Home'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
+import { LogIn } from './pages/Login/Login'
+import { SignUp } from './pages/SignUp/SignUp'
+import { MyURL } from './pages/MyURL/MyURL'
+import { About } from './pages/About/About'
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Root />}>
         <Route index element={<Home />} />
+        <Route path='/login' element={<LogIn/>} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/myurl' element={<MyURL />} />
+        <Route path='/about' element={<About />} />
       </Route>
     )
   );
@@ -32,7 +38,7 @@ function App() {
 const Root = () => {
   return (
     <>
-      <div>
+      <div className='font-mono text-primary'>
         <Navbar />
           <Outlet />
         <Footer />
