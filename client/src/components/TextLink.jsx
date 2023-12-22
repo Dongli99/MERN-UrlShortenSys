@@ -1,6 +1,6 @@
 export const TextLink = (props) => {
     return (
-        <a href={props.href} className='flex items-center text-1.5xl gap-5 tracking-widest hover:bg-primary'>
+        <a href={props.to} className='flex p-2 items-center text-xl rounded gap-5 hover:bg-primary hover:text-white'>
             {props.children}
         </a>
     );
