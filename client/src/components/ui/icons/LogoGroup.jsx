@@ -7,7 +7,7 @@ function LogoGroup() {
       <a href="https://www.linkedin.com/in/dongliliu/">
         <FaLinkedin />
       </a>
-      <a href="https://github.com/Dongli99">
+      <a href="https://github.com/Dongli99/MERN-UrlShortenSys">
         <FaGithub />
       </a>
     </div>

@@ -25,12 +25,10 @@ export const LogIn = () => {
         <PasswordInput password={password} setPassword={setPassword} />
       </InputGroup>
       <FlexLine>
-        <QuickLink href="/signup" text="New user?" />
-        <QuickLink href="/forgotpass" text="Forgot password?" />
+        <QuickLink to="/signup" text="New user?" />
+        <QuickLink to="/forgotpass" text="Forgot password?" />
       </FlexLine>
-      <Button type="submit" onSubmit={handleLogin}>
-        Log in
-      </Button>
+      <Button type="submit">Log in</Button>
     </UssForm>
   );
 };
