@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/ui/Button";
+import { LabelInput } from "../../components/form/LableInput";
 
 export const LogIn = () => {
     const [email, setEmail] = useState('');
@@ -12,48 +13,36 @@ export const LogIn = () => {
     };
   
     return (
-      <div className="flex items-center grow justify-around bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+        <div className="max-w-sm w-full space-y-8">
           <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Log in to your account</h2>
+            <h2 className="mt-6 text-center text-2xl font-extrabold">Log in</h2>
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleLogin}>
             <input type="hidden" name="remember" value="true" />
             <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Password"
-                />
-              </div>
+                <LabelInput 
+                    lblProps={{ text: 'Email address' }}
+                    inpProps={{
+                        id: "email-address", 
+                        type:"email", 
+                        autoComplete:"email", 
+                        required: true, 
+                        value: email, 
+                        onChange: (e)=>setEmail(e.target.value),
+                        placeholder: "Email address",
+                }}/>
+                <LabelInput
+                    lblProps={{ text: 'Password' }}
+                    inpProps={{
+                        id: 'password',
+                        type: 'password',
+                        autoComplete: 'current-password',
+                        required: true,
+                        value: password,
+                        onChange: (e) => setPassword(e.target.value),
+                        placeholder: 'Password',
+                }}/>
             </div>
-  
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -76,6 +65,5 @@ export const LogIn = () => {
             <Button type="submit">Log in</Button>
           </form>
         </div>
-      </div>
     );  
 }
