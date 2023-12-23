@@ -12,6 +12,7 @@ import { SignUp } from "./pages/SignUp/index";
 import { MyURL } from "./pages/MyURL/index";
 import { About } from "./pages/About/index";
 import { Layout } from "./layout/Layout";
+import { ForgotPass } from "./pages/ForgotPass";
 
 function App() {
   const router = createBrowserRouter(
@@ -22,6 +23,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/myurl" element={<MyURL />} />
         <Route path="/about" element={<About />} />
+        <Route path="/forgotpass" element={<ForgotPass />} />
       </Route>
     )
   );

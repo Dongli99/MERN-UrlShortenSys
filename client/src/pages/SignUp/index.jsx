@@ -16,9 +16,11 @@ export const SignUp = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    // submission logic here
     handleConfirmPass();
-    console.log("Signing up with:", email, password);
+    if (passMatch) {
+      // submission logic here
+      console.log("Signing up with:", email, password);
+    }
   };
 
   const handleConfirmPass = (e) => {
