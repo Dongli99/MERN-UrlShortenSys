@@ -1,13 +1,17 @@
 "use strict";
 
-import express from "express";
+import express, { json } from "express";
 import cors from "cors";
+import connectDB from "./config/config.js";
+import AuthController from "./controllers/auth.controller.js";
+
+/*--delete after moving to controller--*/
 import user from "./models/user.model.js";
 import bcrypt from "bcryptjs";
-import connectDB from "./config/config.js";
-const app = express();
-
 const bcryptSalt = bcrypt.genSaltSync(12);
+/*--delete after moving to controller--*/
+
+const app = express();
 
 app.use(cors());
 app.use(express.json());
@@ -18,18 +22,19 @@ app.get("/test", (req, res) => {
   res.json("test ok");
 });
 
-app.post("/register", async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
-  try {
-    const userDoc = await user.create({
-      firstName,
-      lastName,
-      email,
-      password: bcrypt.hashSync(password, bcryptSalt),
-    });
-    res.json(userDoc);
-  } catch (e) {
-    res.status(422).json(e);
+app.post("/register", AuthController.signupUser);
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const userDoc = await user.findOne({ email });
+  if (userDoc) {
+    const passOk = bcrypt.compareSync(password, userDoc.password);
+    if (passOk) {
+      res.json("pass ok");
+    } else {
+      res.status(422).json("wrong pass.");
+    }
+  } else {
+    res.json("User not found.");
   }
 });
 
