@@ -1,5 +1,7 @@
 import UserController from "./user.controller.js";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import TokenService from "../services/TokenService.js";
 
 class AuthController {
   static async signupUser(req, res) {
@@ -18,7 +20,7 @@ class AuthController {
       if (user) {
         const passMatch = bcrypt.compareSync(password, user.password);
         if (passMatch) {
-          res.json("Login successful");
+          TokenService.generateToken(user._id, res);
         } else {
           res.status(422).json("Incorrect password.");
         }
@@ -33,8 +35,11 @@ class AuthController {
   static async logoutUser(req, res) {}
 
   static async resetPassword(req, res) {}
+
   static async verifyEmail(req, res) {}
+
   static async refreshToken(req, res) {}
+
   static async revokeToken(req, res) {}
 }
 

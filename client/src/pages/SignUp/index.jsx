@@ -10,6 +10,7 @@ import { TextWarning } from "../../components/ui/TextWarning";
 import { axiosInstance } from "../../services/axios";
 import { NameInput } from "../../components/form/NameInput";
 import { FlexLine } from "../../components/ui/flexLine";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -18,6 +19,7 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [passMatch, setPassMatch] = useState(true);
+  const navigate = useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -30,6 +32,8 @@ export const SignUp = () => {
           email,
           password,
         });
+        alert("Account Created!");
+        navigate("/login");
       } catch (err) {
         console.log("Failed to register, try again later.", err);
       }
