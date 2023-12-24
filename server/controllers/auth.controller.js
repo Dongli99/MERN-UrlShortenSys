@@ -1,9 +1,7 @@
-import user from "../models/user.model.js";
 import UserController from "./user.controller.js";
+import bcrypt from "bcryptjs";
 
 class AuthController {
-  static async loginUser(req, res) {}
-  static async logoutUser(req, res) {}
   static async signupUser(req, res) {
     try {
       const user = await UserController.createUser(req, res);
@@ -12,6 +10,28 @@ class AuthController {
       throw err;
     }
   }
+
+  static async loginUser(req, res) {
+    try {
+      const { email, password } = req.body;
+      const user = await UserController.getUserByEmail(email);
+      if (user) {
+        const passMatch = bcrypt.compareSync(password, user.password);
+        if (passMatch) {
+          res.json("Login successful");
+        } else {
+          res.status(422).json("Incorrect password.");
+        }
+      } else {
+        res.status(422).json("User not found!");
+      }
+    } catch (err) {
+      res.json("err occurred");
+    }
+  }
+
+  static async logoutUser(req, res) {}
+
   static async resetPassword(req, res) {}
   static async verifyEmail(req, res) {}
   static async refreshToken(req, res) {}

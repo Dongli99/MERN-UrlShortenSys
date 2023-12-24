@@ -7,19 +7,32 @@ import { UssForm } from "../../components/form/UssForm";
 import { Button } from "../../components/ui/Button";
 import { ConfirmPassInput } from "../../components/form/ConfirmPassInput";
 import { TextWarning } from "../../components/ui/TextWarning";
+import { axiosInstance } from "../../services/axios";
+import { NameInput } from "../../components/form/NameInput";
+import { FlexLine } from "../../components/ui/flexLine";
 
 export const SignUp = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [passMatch, setPassMatch] = useState(true);
 
-  const handleSignUp = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
     handleConfirmPass();
     if (passMatch) {
-      // submission logic here
-      console.log("Signing up with:", email, password);
+      try {
+        await axiosInstance.post("/register", {
+          firstName,
+          lastName,
+          email,
+          password,
+        });
+      } catch (err) {
+        console.log("Failed to register, try again later.", err);
+      }
     }
   };
 
@@ -28,8 +41,20 @@ export const SignUp = () => {
   };
 
   return (
-    <UssForm title="Sign Up" onSubmit={handleSignUp}>
+    <UssForm title="Sign Up" onSubmit={registerUser}>
       <InputGroup>
+        <FlexLine>
+          <NameInput
+            nameType={"given-name"}
+            name={firstName}
+            setName={setFirstName}
+          />
+          <NameInput
+            nameType={"family-name"}
+            name={lastName}
+            setName={setLastName}
+          />
+        </FlexLine>
         <EmailInput email={email} setEmail={setEmail} />
         <PasswordInput password={password} setPassword={setPassword} />
         <ConfirmPassInput

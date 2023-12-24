@@ -23,19 +23,6 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/register", AuthController.signupUser);
-app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const userDoc = await user.findOne({ email });
-  if (userDoc) {
-    const passOk = bcrypt.compareSync(password, userDoc.password);
-    if (passOk) {
-      res.json("pass ok");
-    } else {
-      res.status(422).json("wrong pass.");
-    }
-  } else {
-    res.json("User not found.");
-  }
-});
+app.post("/login", AuthController.loginUser);
 
 app.listen(4000);

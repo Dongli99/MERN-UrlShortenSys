@@ -6,15 +6,20 @@ import { UssForm } from "../../components/form/UssForm";
 import { PasswordInput } from "../../components/form/PasswordInput";
 import { EmailInput } from "../../components/form/EmailInput";
 import { FlexLine } from "../../components/ui/flexLine";
+import { axiosInstance } from "../../services/axios";
 
 export const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // authentication logic here
-    console.log("Logging in with:", email, password);
+    try {
+      await axiosInstance.post("/login", { email, password });
+      alert("Log in successful.");
+    } catch (err) {
+      alert("Log in failed", err);
+    }
   };
 
   return (
