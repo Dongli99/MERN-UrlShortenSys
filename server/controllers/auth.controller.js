@@ -20,7 +20,7 @@ class AuthController {
       if (user) {
         const passMatch = bcrypt.compareSync(password, user.password);
         if (passMatch) {
-          TokenService.generateToken(user._id, res);
+          TokenService.generateToken(user, res);
         } else {
           res.status(422).json("Incorrect password.");
         }

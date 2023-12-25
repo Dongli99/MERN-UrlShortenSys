@@ -1,7 +1,3 @@
 export const MyURL = () => {
-    return (
-        <dev>
-            This is MyURL.
-        </dev>
-    )
-}
+  return <div>This is MyURL.</div>;
+};

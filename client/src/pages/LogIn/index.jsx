@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button } from "../../components/ui/Button";
 import { QuickLink } from "../../components/form/QuickLink";
 import { InputGroup } from "../../components/form/InputGroup";
@@ -8,17 +8,20 @@ import { EmailInput } from "../../components/form/EmailInput";
 import { FlexLine } from "../../components/ui/flexLine";
 import { axiosInstance } from "../../services/axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
 
 export const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post("/login", { email, password });
+      const { user } = await axiosInstance.post("/login", { email, password });
       alert("Log in successful.");
+      setUser(user);
       navigate("/");
     } catch (err) {
       alert("Log in failed", err);

@@ -3,8 +3,11 @@ import Logo from "../assets/logo_titled.png";
 import { TextLink } from "../components/ui/TextLink";
 import { Hamburger } from "../components/ui/icons/Hamburger";
 import { Avatar } from "../components/ui/icons/Avatar";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export const Navbar = () => {
+  const { user } = useContext(UserContext);
   return (
     <nav className="flex px-6 py-4 justify-between">
       <Link to={"/"} className="flex items-center">
@@ -21,9 +24,7 @@ export const Navbar = () => {
       >
         <Hamburger />
         <Avatar />
-        {/* <Link to={'/login'}>Log In</Link>
-                <div>/</div>
-                <Link to={'/signup'}>Sign Up</Link> */}
+        {!!user && <div className="text-primary">{user.firstName}</div>}
       </Link>
     </nav>
   );

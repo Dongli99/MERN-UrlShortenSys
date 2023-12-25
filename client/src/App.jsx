@@ -13,6 +13,7 @@ import { MyURL } from "./pages/MyURL/index";
 import { About } from "./pages/About/index";
 import { Layout } from "./layout/Layout";
 import { ForgotPass } from "./pages/ForgotPass";
+import { UserContextProvider } from "./contexts/UserContext";
 
 function App() {
   const router = createBrowserRouter(
@@ -30,7 +31,9 @@ function App() {
 
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <UserContextProvider>
+        <RouterProvider router={router} />
+      </UserContextProvider>
     </div>
   );
 }
