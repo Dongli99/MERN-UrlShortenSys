@@ -8,21 +8,22 @@ import { EmailInput } from "../../components/form/EmailInput";
 import { FlexLine } from "../../components/ui/flexLine";
 import { axiosInstance } from "../../services/axios";
 import { useNavigate } from "react-router-dom";
+import { fetchProfile } from "../../utils/fetchProfile";
 import { UserContext } from "../../contexts/UserContext";
 
 export const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { user } = await axiosInstance.post("/login", { email, password });
+      await axiosInstance.post("/login", { email, password });
       alert("Log in successful.");
-      setUser(user);
-      navigate("/");
+      fetchProfile(setUser);
+      navigate("/", { replace: true });
     } catch (err) {
       alert("Log in failed", err);
     }
