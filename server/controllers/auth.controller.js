@@ -25,10 +25,10 @@ class AuthController {
           res.status(422).json("Incorrect password.");
         }
       } else {
-        res.status(422).json("User not found!");
+        res.status(404).json("User not found!");
       }
     } catch (err) {
-      res.json("err occurred");
+      res.status(500).json({ error: "Internal server error" });
     }
   }
 

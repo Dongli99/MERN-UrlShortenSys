@@ -5,9 +5,20 @@ import { Hamburger } from "../components/ui/icons/Hamburger";
 import { Avatar } from "../components/ui/icons/Avatar";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import { FlexLine } from "../components/ui/flexLine";
+import Cookies from "js-cookie";
 
 export const Navbar = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const active = user && !!user.firstName;
+  const handleSignOut = () => {
+    Cookies.remove("token");
+    setUser(null);
+    navigate("/login");
+  };
+
   return (
     <nav className="flex px-6 py-4 justify-between">
       <Link to={"/"} className="flex items-center">
@@ -23,9 +34,16 @@ export const Navbar = () => {
         className="flex items-center text-xl gap-3 font-light"
       >
         <Hamburger />
-        <Avatar />
-        {!!user && <div className="text-primary">{user.firstName}</div>}
       </Link>
+      {active && (
+        <FlexLine>
+          <TextLink to={"/"}>
+            <Avatar />
+            {user.firstName}
+          </TextLink>
+          <TextLink onClick={handleSignOut}>Sign Out</TextLink>
+        </FlexLine>
+      )}
     </nav>
   );
 };

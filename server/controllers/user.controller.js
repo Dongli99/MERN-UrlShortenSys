@@ -12,9 +12,9 @@ class UserController {
         email,
         password: bcrypt.hashSync(password, bcryptSalt),
       });
-      return newUser;
+      res.json({ message: "New User created successfully", newUser });
     } catch (err) {
-      throw err;
+      res.status(500).json({ error: "Internal server error" });
     }
   }
 
@@ -22,11 +22,31 @@ class UserController {
 
   static async getAllUsers(req, res) {}
 
-  static async getUserById(req, res) {}
+  static async getUserById(req, res) {
+    const userId = req.params._id;
+    try {
+      const user = await User.findOne({ userId });
+      if (!user) {
+        return res.status(404).json({ error: "User not found." });
+      }
+      const sanitizedUser = {
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      };
+      return sanitizedUser;
+    } catch (err) {
+      throw err;
+    }
+  }
 
-  static async getUserByEmail(email) {
+  static async getUserByEmail(email, sanitized = false) {
     try {
       const user = await User.findOne({ email });
+      if (!user) {
+        return null;
+      }
       return user;
     } catch (err) {
       throw err;

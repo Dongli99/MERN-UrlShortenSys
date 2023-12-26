@@ -1,10 +1,12 @@
-export const TextLink = (props) => {
-    return (
-        <a 
-        href={props.to} 
-        className='flex p-2 items-center text-base rounded gap-5 hover:bg-primary hover:text-white'
-        >
-            {props.children}
-        </a>
-    );
-}
+import { Link } from "react-router-dom";
+
+export const TextLink = ({ children, ...props }) => {
+  return (
+    <Link
+      {...props}
+      className="flex p-2 items-center text rounded gap-5 hover:bg-primary hover:text-white"
+    >
+      {children}
+    </Link>
+  );
+};

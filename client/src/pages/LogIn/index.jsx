@@ -23,7 +23,7 @@ export const LogIn = () => {
       await axiosInstance.post("/login", { email, password });
       alert("Log in successful.");
       fetchProfile(setUser);
-      navigate("/", { replace: true });
+      navigate("/");
     } catch (err) {
       alert("Log in failed", err);
     }
