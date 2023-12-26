@@ -10,9 +10,6 @@ class TokenService {
       const token = jwt.sign(
         {
           id: user._id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
         },
         process.env.JWT_SECRET,
         {

@@ -13,6 +13,7 @@ import bcrypt from "bcryptjs";
 const bcryptSalt = bcrypt.genSaltSync(12);
 import process from "process";
 import dotenv from "dotenv";
+import UserController from "./controllers/user.controller.js";
 dotenv.config({ path: "./.env" });
 /*--delete after moving to controller--*/
 
@@ -38,8 +39,12 @@ app.post("/login", AuthController.loginUser);
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
       if (err) throw err;
+      const user = await UserController.getUserById(userData.id);
+      if (!user) {
+        res.json("user not found!");
+      }
       res.json(user);
     });
   } else {
