@@ -24,7 +24,7 @@ export const SignUp = () => {
   const registerUser = async (e) => {
     e.preventDefault();
     handleConfirmPass();
-    if (passMatch) {
+    if (password === confirmPass) {
       try {
         await axiosInstance.post("/register", {
           firstName,
@@ -40,7 +40,7 @@ export const SignUp = () => {
     }
   };
 
-  const handleConfirmPass = (e) => {
+  const handleConfirmPass = async () => {
     setPassMatch(password === confirmPass);
   };
 
