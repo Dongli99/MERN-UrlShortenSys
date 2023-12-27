@@ -8,6 +8,7 @@ export const NameInput = ({ nameType, name, setName }) => {
   return (
     <TextLineInput
       lblProps={{ text: nameType }}
+      fullWidth={false}
       inpProps={{
         id: nameType,
         type: "text",

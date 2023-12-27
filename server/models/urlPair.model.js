@@ -52,7 +52,6 @@ const UrlPairSchema = new Schema({
   clicks: [ClickSchema], // Array of click information
 });
 
-// Enable expire time for the URL Pair
 UrlPairSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 }); // Set up expiration for the URL Pair
 UrlPairSchema.index({
   "clicks.geoLocation.country": 1,
