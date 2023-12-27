@@ -24,7 +24,7 @@ export const Navbar = () => {
       <Link to={"/"} className="flex items-center">
         <img src={Logo} alt="URL Shorten System" className="h-10" />
       </Link>
-      <div className="flex items-center text-1.5xl gap-3 tracking-widest">
+      <div className="flex items-center text-xl gap-3 tracking-widest">
         <TextLink to={"/"}>Shorten</TextLink>
         <TextLink to={"/myurl"}>My URL</TextLink>
         <TextLink to={"/about"}>About</TextLink>

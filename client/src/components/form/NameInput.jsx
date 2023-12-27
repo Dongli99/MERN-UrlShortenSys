@@ -17,7 +17,7 @@ export const NameInput = ({ nameType, name, setName }) => {
         value: name,
         onChange: (e) => setName(e.target.value),
         placeholder: placeHolderText,
-        className: "w-48",
+        className: "w-full",
       }}
     />
   );

@@ -10,15 +10,15 @@ export const Home = () => {
   const [alias, setAlias] = useState(null);
 
   return (
-    <UssForm title="Shorten Your URL">
+    <UssForm title="Shorten Your URL" divStyle="max-w-lg">
       <OriginalUrlInput
         originalUrl={originalUrl}
         setOriginalUrl={setOriginalUrl}
       />
-      <FlexLine>Customize Your Link.</FlexLine>
+      <FlexLine>Customize Your Link (Optional).</FlexLine>
       <FlexLine>
         <AliasInput alias={alias} setAlias={setAlias} />
-        <Button type="submit" fullWidth={false} className="w-auto">
+        <Button type="submit" fullWidth={false} className="w-1/3">
           Generate
         </Button>
       </FlexLine>
