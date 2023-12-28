@@ -26,7 +26,7 @@ export const SignUp = () => {
     handleConfirmPass();
     if (password === confirmPass) {
       try {
-        await axiosInstance.post("/register", {
+        await axiosInstance.post("/api/auth/register", {
           firstName,
           lastName,
           email,

@@ -20,7 +20,7 @@ export const LogIn = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post("/login", { email, password });
+      await axiosInstance.post("/api/auth/login", { email, password });
       alert("Log in successful.");
       fetchProfile(setUser);
       navigate("/");

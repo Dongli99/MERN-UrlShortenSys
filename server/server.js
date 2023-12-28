@@ -14,6 +14,8 @@ const bcryptSalt = bcrypt.genSaltSync(12);
 import process from "process";
 import dotenv from "dotenv";
 import UserController from "./controllers/user.controller.js";
+import userRouter from "./routes/user.routes.js";
+import authRouter from "./routes/auth.routes.js";
 dotenv.config({ path: "./.env" });
 /*--delete after moving to controller--*/
 
@@ -30,8 +32,7 @@ app.use(CookieParser());
 
 connectDB();
 
-app.post("/register", AuthController.signupUser);
-app.post("/login", AuthController.loginUser);
-app.get("/profile", UserController.getProfileByToken);
+app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
 
 app.listen(process.env.PORT);
