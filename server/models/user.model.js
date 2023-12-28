@@ -15,8 +15,12 @@ const UserSchema = new Schema({
   email: { type: String, unique: true },
   password: String,
   urlPairs: [{ type: mongoose.Schema.Types.ObjectId, ref: "urlPair" }],
-  created: { type: Date, default: Date.now },
+  created: { type: Date, immutable: true, default: Date.now },
   updated: { type: Date, default: Date.now },
+});
+
+UserSchema.pre("save", function (next) {
+  this.updated = Date.now();
 });
 
 const User = mongoose.model("user", UserSchema);

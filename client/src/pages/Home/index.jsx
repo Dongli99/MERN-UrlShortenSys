@@ -35,9 +35,12 @@ export const Home = () => {
 
   const handleClickGenButton = async (e) => {
     e.preventDefault();
-
+    if (isChecked && aliasErr !== "") {
+      alert("Please input valid alias, or uncheck customize option.");
+      return;
+    } else if (!isChecked) {
+    }
     await axiosInstance.post("/");
-    // will be finished later.
   };
 
   /**
