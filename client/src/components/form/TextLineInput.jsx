@@ -6,6 +6,7 @@ export const TextLineInput = ({ lblProps, fullWidth = true, inpProps }) => {
       </label>
       <input
         {...inpProps}
+        value={inpProps.value}
         className={`appearance-none rounded-none relative block ${
           fullWidth ? "w-full" : ""
         }  

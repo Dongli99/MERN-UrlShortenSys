@@ -4,24 +4,70 @@ import { FlexLine } from "../../components/ui/flexLine";
 import { useState } from "react";
 import { AliasInput } from "./AliasInput";
 import { Button } from "../../components/ui/Button";
+import { Checkbox } from "../../components/form/CheckBox";
+import { axiosInstance } from "../../services/axios";
+import { aliasPattern } from "../../utils/validationPatterns";
+import { TextWarning } from "../../components/ui/TextWarning";
 
+/**
+ * Home component for shortening URLs.
+ * @function
+ * @returns {JSX.Element} - Rendered Home component.
+ */
 export const Home = () => {
-  const [originalUrl, setOriginalUrl] = useState(null);
-  const [alias, setAlias] = useState(null);
+  const [originalUrl, setOriginalUrl] = useState("");
+  const [alias, setAlias] = useState("");
+  const [aliasErr, setAliasErr] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleAliasChange = (newAlias) => {
+    if (newAlias.length >= 4 && aliasPattern.test(newAlias)) {
+      setAlias(newAlias);
+      setAliasErr("");
+    } else {
+      setAlias(newAlias);
+      setAliasErr("At least 4 chars with letters, numbers, and _.");
+    }
+  };
+
+  const handleClickGenButton = async (e) => {
+    e.preventDefault();
+    await axiosInstance.post("/");
+    // will be finished later.
+  };
+
+  /**
+   * Render the Home component.
+   * @returns {JSX.Element} - Rendered Home component.
+   */
   return (
-    <UssForm title="Shorten Your URL" divStyle="max-w-lg">
+    <UssForm
+      title="Shorten Your URL"
+      divStyle="max-w-lg"
+      onSubmit={handleClickGenButton}
+    >
       <OriginalUrlInput
         originalUrl={originalUrl}
         setOriginalUrl={setOriginalUrl}
       />
-      <FlexLine>Customize Your Link (Optional).</FlexLine>
+      <Checkbox
+        id="customize-check"
+        onChange={handleCheckboxChange}
+        isChecked={isChecked}
+      >
+        Customize Your Link.
+      </Checkbox>
       <FlexLine>
-        <AliasInput alias={alias} setAlias={setAlias} />
+        <AliasInput alias={alias} setAlias={handleAliasChange} />
         <Button type="submit" fullWidth={false} className="w-1/3">
           Generate
         </Button>
       </FlexLine>
+      {aliasErr != "" && <TextWarning message={aliasErr} />}
     </UssForm>
   );
 };

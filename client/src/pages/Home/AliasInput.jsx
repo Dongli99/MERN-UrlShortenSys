@@ -11,7 +11,6 @@ export const AliasInput = ({ alias, setAlias }) => {
         value: alias,
         onChange: (e) => setAlias(e.target.value),
         placeholder: "at least 4 chars",
-        className: "w-64",
       }}
     />
   );
