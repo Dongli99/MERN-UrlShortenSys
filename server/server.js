@@ -16,6 +16,7 @@ import dotenv from "dotenv";
 import UserController from "./controllers/user.controller.js";
 import userRouter from "./routes/user.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import urlPairRouter from "./routes/urlPair.routes.js";
 dotenv.config({ path: "./.env" });
 /*--delete after moving to controller--*/
 
@@ -34,5 +35,6 @@ connectDB();
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/url", urlPairRouter);
 
 app.listen(process.env.PORT);

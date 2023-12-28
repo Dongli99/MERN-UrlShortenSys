@@ -25,17 +25,17 @@ export const Home = () => {
   };
 
   const handleAliasChange = (newAlias) => {
+    setAlias(newAlias);
     if (newAlias.length >= 4 && aliasPattern.test(newAlias)) {
-      setAlias(newAlias);
       setAliasErr("");
     } else {
-      setAlias(newAlias);
-      setAliasErr("At least 4 chars with letters, numbers, and _.");
+      setAliasErr("Minimum 4 chars (letter/number/_)");
     }
   };
 
   const handleClickGenButton = async (e) => {
     e.preventDefault();
+
     await axiosInstance.post("/");
     // will be finished later.
   };

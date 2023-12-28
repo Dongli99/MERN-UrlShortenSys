@@ -1,4 +1,4 @@
-import UrlPair from "../models/UrlPairModel";
+import UrlPair from "../models/urlPair.model.js";
 
 /**
  * @class
@@ -11,7 +11,7 @@ class UrlPairController {
    * @param {Object} res - Express response object
    * @returns {Object} - Created URL Pair
    */
-  async createUrlPair(req, res) {
+  static async createUrlPair(req, res) {
     try {
       const { userId, originalUrl, alias } = req.body;
       const newUrlPair = new UrlPair({
@@ -33,7 +33,7 @@ class UrlPairController {
    * @param {Object} res - Express response object
    * @returns {Object[]} - Array of URL Pairs
    */
-  async getAllUrlPairs(req, res) {
+  static async getAllUrlPairs(req, res) {
     try {
       const urlPairs = await UrlPair.find();
       res.status(200).json(urlPairs);
@@ -49,7 +49,7 @@ class UrlPairController {
    * @param {Object} res - Express response object
    * @returns {Object} - URL Pair
    */
-  async getUrlPairByAlias(req, res) {
+  static async getUrlPair(req, res) {
     try {
       const { alias } = req.params;
       const urlPair = await UrlPair.findOne({ alias });
@@ -70,7 +70,7 @@ class UrlPairController {
    * @param {Object} res - Express response object
    * @returns {Object} - Updated URL Pair
    */
-  async updateUrlPairByAlias(req, res) {
+  static async updateUrlPair(req, res) {
     try {
       const { alias } = req.params;
       const updatedUrlPair = await UrlPair.findOneAndUpdate(
@@ -95,7 +95,7 @@ class UrlPairController {
    * @param {Object} res - Express response object
    * @returns {Object} - Deleted URL Pair
    */
-  async deleteUrlPairByAlias(req, res) {
+  static async deleteUrlPair(req, res) {
     try {
       const { alias } = req.params;
       const deletedUrlPair = await UrlPair.findOneAndDelete({ alias });
