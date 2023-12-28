@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 const bcryptSalt = bcrypt.genSaltSync(12);
 
@@ -47,6 +48,22 @@ class UserController {
       return user;
     } catch (err) {
       throw err;
+    }
+  }
+
+  static getProfileByToken(req, res) {
+    const { token } = req.cookies;
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
+        if (err) throw err;
+        const user = await UserController.getUserById(userData.id);
+        if (!user) {
+          res.json("user not found!");
+        }
+        res.json(user);
+      });
+    } else {
+      res.json("not token");
     }
   }
 

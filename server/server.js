@@ -30,26 +30,8 @@ app.use(CookieParser());
 
 connectDB();
 
-app.get("/test", (req, res) => {
-  res.json("test ok");
-});
-
 app.post("/register", AuthController.signupUser);
 app.post("/login", AuthController.loginUser);
-app.get("/profile", (req, res) => {
-  const { token } = req.cookies;
-  if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
-      if (err) throw err;
-      const user = await UserController.getUserById(userData.id);
-      if (!user) {
-        res.json("user not found!");
-      }
-      res.json(user);
-    });
-  } else {
-    res.json("not token");
-  }
-});
+app.get("/profile", UserController.getProfileByToken);
 
-app.listen(4000);
+app.listen(process.env.PORT);
