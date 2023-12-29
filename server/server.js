@@ -2,7 +2,7 @@
 
 import express, { json } from "express";
 import cors from "cors";
-import connectDB from "./config/config.js";
+import connectDB from "./config/connectDB.js";
 import AuthController from "./controllers/auth.controller.js";
 
 /*--delete after moving to controller--*/
