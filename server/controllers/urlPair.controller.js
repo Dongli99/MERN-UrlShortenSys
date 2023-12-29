@@ -16,7 +16,7 @@ class UrlPairController {
     try {
       const { userId, originalUrl, alias } = req.body;
       const newUrlPair = new UrlPair({
-        userId: userId || "anonymous",
+        userId: userId,
         originalUrl,
         alias: alias || (await CurrAliasController.updateCurrAlias()),
       });

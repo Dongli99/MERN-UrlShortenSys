@@ -46,7 +46,7 @@ export const Home = () => {
       }
       try {
         const { data } = await axiosInstance.post("/api/uss/createUrlPair", {
-          userId: user._id,
+          userId: user?._id,
           originalUrl: originalUrl,
           alias: alias,
         });
