@@ -1,5 +1,6 @@
 import UrlPair from "../models/urlPair.model.js";
 import CurrAliasController from "./currAlias.controller.js";
+import UserController from "./user.controller.js";
 
 /**
  * @class
@@ -22,6 +23,9 @@ class UrlPairController {
       });
       const savedUrlPair = await newUrlPair.save();
       res.status(201).json(savedUrlPair);
+      if (userId) {
+        UserController.addUrlPairToUser(userId, savedUrlPair._id);
+      }
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal server error" });

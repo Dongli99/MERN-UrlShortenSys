@@ -67,6 +67,20 @@ class UserController {
     }
   }
 
+  static async addUrlPairToUser(userId, urlPairId) {
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        return null;
+      }
+      user.urlPairs.push(urlPairId);
+      await user.save();
+      return user;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   static async deleteUser(req, res) {}
 
   static async sanitizeUser(user) {
