@@ -29,13 +29,7 @@ export const Navbar = () => {
         <TextLink to={"/myurl"}>My URL</TextLink>
         <TextLink to={"/about"}>About</TextLink>
       </div>
-      <Link
-        to={"/login"}
-        className="flex items-center text-xl gap-3 font-light"
-      >
-        <Hamburger />
-      </Link>
-      {active && (
+      {active ? (
         <FlexLine>
           <TextLink to={"/"}>
             <Avatar />
@@ -43,6 +37,13 @@ export const Navbar = () => {
           </TextLink>
           <TextLink onClick={handleSignOut}>Sign Out</TextLink>
         </FlexLine>
+      ) : (
+        <Link
+          to={"/login"}
+          className="flex items-center text-xl gap-3 font-light"
+        >
+          <Hamburger />
+        </Link>
       )}
     </nav>
   );

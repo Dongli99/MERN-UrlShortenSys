@@ -30,7 +30,7 @@ export const LogIn = () => {
   };
 
   return (
-    <UssForm title="Log In" onSubmit={handleLogin}>
+    <UssForm title="Log In" onSubmit={handleLogin} divStyle="max-w-sm">
       <input type="hidden" name="remember" value="true" />
       <InputGroup>
         <EmailInput email={email} setEmail={setEmail} />

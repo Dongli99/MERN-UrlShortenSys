@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 export const UssForm = ({ title, onSubmit, children, divStyle = "" }) => {
   return (
     <div
-      className={`max-w-sm w-full space-y-8 border-solid border border-grey-800 
+      className={`w-full space-y-8 border-solid border border-grey-800 
     p-8 rounded-xl shadow-lg ${divStyle}`}
     >
       <div>

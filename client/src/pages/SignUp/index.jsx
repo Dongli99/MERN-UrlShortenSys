@@ -45,7 +45,7 @@ export const SignUp = () => {
   };
 
   return (
-    <UssForm title="Sign Up" onSubmit={registerUser}>
+    <UssForm title="Sign Up" onSubmit={registerUser} divStyle="max-w-sm">
       <InputGroup>
         <FlexLine>
           <NameInput
