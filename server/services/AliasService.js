@@ -11,3 +11,5 @@ class AliasService {
     }
   }
 }
+
+export default AliasService;

@@ -1,18 +1,17 @@
 import mongoose, { Schema } from "mongoose";
 
-const CurrAliasSchema = new Schema(
-  {
-    count: {
-      type: Number,
-      required: true,
-    },
-    alias: {
-      type: String,
-      required: true,
-    },
+const CurrAliasSchema = new Schema({
+  count: {
+    type: Number,
+    unique: true,
+    required: true,
   },
-  { collation: "currAlias" }
-);
+  alias: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+});
 
 const CurrAlias = mongoose.model("currAlias", CurrAliasSchema);
 
