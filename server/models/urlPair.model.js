@@ -38,7 +38,7 @@ const ClickSchema = new Schema({
  */
 
 const UrlPairSchema = new Schema({
-  userId: { type: String, default: "anonymous" },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   originalUrl: String,
   alias: { type: String, index: true, unique: true }, // Alias is indexed for fast retrieval
   createdAt: { type: Date, default: Date.now },
@@ -46,18 +46,23 @@ const UrlPairSchema = new Schema({
   expireAt: {
     type: Date,
     default: function () {
-      return this.modifiedAt + 90 * 24 * 60 * 60 * 1000; // Default expiration is 90 days from modifiedAt
+      return this.modifiedAt.getTime() + 90 * 24 * 60 * 60 * 1000; // Default expiration is 90 days from modifiedAt
     },
   },
   clicks: [ClickSchema], // Array of click information
 });
 
-UrlPairSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 }); // Set up expiration for the URL Pair
+UrlPairSchema.index({ expireAt: 1 }, { expireAfterSeconds: 1800 }); // Set up expiration for the URL Pair
 UrlPairSchema.index({
   "clicks.geoLocation.country": 1,
   "clicks.geoLocation.region": 1,
 }); // Index for fast retrieval based on geo-location
 UrlPairSchema.index({ "clicks.timeStamp": 1 }); // Index for fast retrieval based on timestamp
+
+UrlPairSchema.pre("save", function (next) {
+  this.modifiedAt = Date.now();
+  next();
+});
 
 const UrlPair = mongoose.model("urlPair", UrlPairSchema);
 

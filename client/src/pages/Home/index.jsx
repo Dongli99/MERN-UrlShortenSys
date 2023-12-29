@@ -1,13 +1,14 @@
 import { OriginalUrlInput } from "./OriginalUrlInput";
 import { UssForm } from "../../components/form/UssForm";
 import { FlexLine } from "../../components/ui/flexLine";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AliasInput } from "./AliasInput";
 import { Button } from "../../components/ui/Button";
 import { Checkbox } from "../../components/form/CheckBox";
 import { axiosInstance } from "../../services/axios";
 import { aliasPattern } from "../../utils/validationPatterns";
 import { TextWarning } from "../../components/ui/TextWarning";
+import { UserContext } from "../../contexts/UserContext";
 
 /**
  * Home component for shortening URLs.
@@ -19,6 +20,7 @@ export const Home = () => {
   const [alias, setAlias] = useState("");
   const [aliasErr, setAliasErr] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const { user } = useContext(UserContext);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -38,9 +40,21 @@ export const Home = () => {
     if (isChecked && aliasErr !== "") {
       alert("Please input valid alias, or uncheck customize option.");
       return;
-    } else if (!isChecked) {
+    } else {
+      if (!isChecked) {
+        setAlias("");
+      }
+      try {
+        const { data } = await axiosInstance.post("/api/uss/createUrlPair", {
+          userId: user._id,
+          originalUrl: originalUrl,
+          alias: alias,
+        });
+        console.log(data.alias);
+      } catch (err) {
+        console.log(err);
+      }
     }
-    await axiosInstance.post("/");
   };
 
   /**

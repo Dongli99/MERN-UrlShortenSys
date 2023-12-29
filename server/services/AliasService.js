@@ -2,13 +2,14 @@ import config from "../config/config.js";
 
 class AliasService {
   static encode(count) {
-    base = config.codeBook.length;
-    alias = "";
+    const base = config.codeBook.length;
+    let alias = "";
     while (count > 0) {
-      index = count % base;
+      let index = count % base;
       count = Math.floor(count / base);
       alias += config.codeBook[index];
     }
+    return alias;
   }
 }
 

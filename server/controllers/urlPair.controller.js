@@ -1,4 +1,5 @@
 import UrlPair from "../models/urlPair.model.js";
+import CurrAliasController from "./currAlias.controller.js";
 
 /**
  * @class
@@ -17,7 +18,7 @@ class UrlPairController {
       const newUrlPair = new UrlPair({
         userId: userId || "anonymous",
         originalUrl,
-        alias,
+        alias: alias || (await CurrAliasController.updateCurrAlias()),
       });
       const savedUrlPair = await newUrlPair.save();
       res.status(201).json(savedUrlPair);
