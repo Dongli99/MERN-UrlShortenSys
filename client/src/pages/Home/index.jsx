@@ -84,7 +84,7 @@ export const Home = () => {
           Generate
         </Button>
       </FlexLine>
-      {aliasErr != "" && <TextWarning message={aliasErr} />}
+      {aliasErr !== "" && <TextWarning message={aliasErr} />}
     </UssForm>
   );
 };

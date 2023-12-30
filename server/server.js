@@ -9,6 +9,7 @@ import userRouter from "./routes/user.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import urlPairRouter from "./routes/urlPair.routes.js";
 import CurrAlias from "./models/CurrAlias.model.js";
+import UrlPairController from "./controllers/urlPair.controller.js";
 /*--delete after moving to controller--*/
 
 const app = express();
@@ -27,6 +28,8 @@ connectDB();
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/uss", urlPairRouter);
+app.get("/:alias", UrlPairController.redirectToOrigin);
+app.get("/test", UrlPairController.redirectToOrigin);
 
 app.listen(config.port, () => {
   console.log("Server is running on " + config.port);

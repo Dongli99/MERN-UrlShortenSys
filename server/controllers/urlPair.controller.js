@@ -1,6 +1,7 @@
 import UrlPair from "../models/urlPair.model.js";
 import CurrAliasController from "./currAlias.controller.js";
 import UserController from "./user.controller.js";
+import geoip from "geoip-lite";
 
 /**
  * @class
@@ -112,6 +113,20 @@ class UrlPairController {
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+  static async redirectToOrigin(req, res) {
+    // const { alias } = req.params;
+    const ip = req.ip;
+    let city = "",
+      region = "",
+      country = "";
+    if (ip || ip !== "::1") {
+      const location = geoip.lookup(ip);
+      city = location?.city || "";
+      region = location?.region || "";
+      country = location?.country || "";
     }
   }
 }
