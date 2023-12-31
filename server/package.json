@@ -1,4 +1,5 @@
 {
+  "author": "Dongli Liu",
   "type": "module",
   "dependencies": {
     "bcryptjs": "^2.4.3",
