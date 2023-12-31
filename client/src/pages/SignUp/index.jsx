@@ -9,7 +9,7 @@ import { ConfirmPassInput } from "../../components/form/ConfirmPassInput";
 import { TextWarning } from "../../components/ui/TextWarning";
 import { axiosInstance } from "../../services/axios";
 import { NameInput } from "../../components/form/NameInput";
-import { FlexLine } from "../../components/ui/flexLine";
+import { FlexLine } from "../../components/ui/FlexLine";
 import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {

@@ -6,7 +6,7 @@ import { Avatar } from "../components/ui/icons/Avatar";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
-import { FlexLine } from "../components/ui/flexLine";
+import { FlexLine } from "../components/ui/FlexLine";
 import Cookies from "js-cookie";
 
 export const Navbar = () => {

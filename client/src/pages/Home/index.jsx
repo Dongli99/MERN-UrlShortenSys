@@ -1,6 +1,6 @@
 import { OriginalUrlInput } from "./OriginalUrlInput";
 import { UssForm } from "../../components/form/UssForm";
-import { FlexLine } from "../../components/ui/flexLine";
+import { FlexLine } from "../../components/ui/FlexLine";
 import { useContext, useState } from "react";
 import { AliasInput } from "./AliasInput";
 import { Button } from "../../components/ui/Button";

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { UssForm } from "../../components/form/UssForm";
 import { EmailInput } from "../../components/form/EmailInput";
-import { FlexLine } from "../../components/ui/flexLine";
+import { FlexLine } from "../../components/ui/FlexLine";
 import { Button } from "../../components/ui/Button";
 
 export const ForgotPass = () => {
