@@ -5,7 +5,7 @@ import { InputGroup } from "../../components/form/InputGroup";
 import { UssForm } from "../../components/form/UssForm";
 import { PasswordInput } from "../../components/form/PasswordInput";
 import { EmailInput } from "../../components/form/EmailInput";
-import { FlexLine } from "../../components/ui/flexLine";
+import { FlexLine } from "../../components/ui/FlexLine";
 import { axiosInstance } from "../../services/axios";
 import { useNavigate } from "react-router-dom";
 import { fetchProfile } from "../../utils/fetchProfile";
