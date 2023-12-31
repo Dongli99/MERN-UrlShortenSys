@@ -8,6 +8,7 @@ const config = {
   port: process.env.PORT,
   codeBook: process.env.CODE_BOOK,
   currAliasId: process.env.CURR_ALIAS_ID,
+  nodeEnv: process.env.NODE_ENV,
 };
 
 export default config;
