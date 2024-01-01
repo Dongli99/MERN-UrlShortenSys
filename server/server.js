@@ -15,7 +15,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
-if (config.nodeEnv === "production") {
+if (config.nodeEnv === "development") {
   const corsOptions = {
     origin: config.origin,
     credentials: true,
