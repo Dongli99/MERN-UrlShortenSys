@@ -4,9 +4,7 @@
     "start": "concurrently \"npm run start:back\" \"npm run start:front\"",
     "start:back": "nodemon server/server.js",
     "start:front": "cd client && npm run preview",
-    "build": "npm run build:back && npm run build:front",
-    "build:back": "cd server && npm install",
-    "build:front": "cd client && npm run build"
+    "build": "cd client && npm run build"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

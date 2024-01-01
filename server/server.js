@@ -15,12 +15,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
-const corsOptions = {
-  origin: config.origin,
-  credentials: true,
-};
+if (config.nodeEnv === "production") {
+  const corsOptions = {
+    origin: config.origin,
+    credentials: true,
+  };
+  app.use(cors(corsOptions));
+} else {
+  app.use(cors());
+}
 
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(CookieParser());
 

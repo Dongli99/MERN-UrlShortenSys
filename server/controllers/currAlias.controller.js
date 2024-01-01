@@ -1,4 +1,4 @@
-import CurrAlias from "../models/CurrAlias.model.js";
+import CurrAlias from "../models/currAlias.model.js";
 import config from "../config/config.js";
 import AliasService from "../services/AliasService.js";
 
