@@ -1,9 +1,7 @@
 {
   "scripts": {
     "dev": "concurrently \"cd client && npm run dev\" \"nodemon --watch server --exec node server/server.js\"",
-    "start": "concurrently \"npm run start:back\" \"npm run start:front\"",
-    "start:back": "nodemon server/server.js",
-    "start:front": "cd client && npm run preview",
+    "start": "node server/server.js",
     "build": "cd client && npm run build"
   },
   "devDependencies": {
