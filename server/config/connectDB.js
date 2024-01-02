@@ -10,6 +10,7 @@ const connectDB = async () => {
     }
     await mongoose.connect(config.dbURI);
     // show connection status
+    console.log("DB connected.");
     mongoose.connection.on("connected", () => {
       console.log("Mongoose connected to Database.");
     });
