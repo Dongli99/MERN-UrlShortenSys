@@ -29,7 +29,6 @@ app.use(express.json());
 app.use(CookieParser());
 
 connectDB();
-console.log(__dirname);
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);

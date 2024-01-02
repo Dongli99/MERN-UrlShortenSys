@@ -1,3 +1,3 @@
 export const MyURL = () => {
-  return <div>This is MyURL.</div>;
+  return <div>This is MyURL.{JSON.stringify(import.meta.env)}</div>;
 };
