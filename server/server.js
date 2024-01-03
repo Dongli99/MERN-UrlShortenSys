@@ -23,7 +23,7 @@ if (config.nodeEnv === "development") {
   };
   app.use(cors(corsOptions));
 } else {
-  console.log("Running development mode.");
+  console.log("Running production mode.");
   app.use(cors());
 }
 
@@ -39,7 +39,7 @@ app.get("/:alias", UrlPairController.redirectToOrigin);
 app.get("/test", UrlPairController.redirectToOrigin);
 
 if (config.nodeEnv === "production") {
-  console.log("Running development mode.");
+  console.log("Running production mode.");
   const distPath = path.join(__dirname, "../client/dist");
   app.use(express.static(distPath));
 
