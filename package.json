@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "concurrently \"cd client && npm run dev\" \"nodemon --watch server --exec node server/server.js\"",
     "start": "node server/server.js",
-    "build": "cd client && npm run build"
+    "build": "npm run install && cd client && npm run build",
+    "install": "npm i && cd client && npm i && cd ../server && npm i"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

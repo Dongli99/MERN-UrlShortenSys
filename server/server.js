@@ -35,8 +35,13 @@ connectDB();
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/uss", urlPairRouter);
+app.get("/test", async (req, res) => {
+  res.status(200).send("ok");
+});
 app.get("/:alias", UrlPairController.redirectToOrigin);
-app.get("/test", UrlPairController.redirectToOrigin);
+app.get("/test", async (req, res) => {
+  res.status(200).send("ok");
+});
 
 if (config.nodeEnv === "production") {
   console.log("Running production mode.");
