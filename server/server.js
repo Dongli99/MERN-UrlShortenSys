@@ -35,8 +35,9 @@ connectDB();
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/uss", urlPairRouter);
-app.get("/:alias", UrlPairController.redirectToOrigin);
-app.get("/test", UrlPairController.redirectToOrigin);
+app.get("/test", async (req, req) => {
+  res.send("test ok");
+});
 
 if (config.nodeEnv === "production") {
   console.log("Running production mode.");
@@ -48,6 +49,8 @@ if (config.nodeEnv === "production") {
 } else {
   app.get("/", (req, res) => res.send("Not on the production mode."));
 }
+
+app.get("/:alias", UrlPairController.redirectToOrigin);
 
 app.listen(config.port, () => {
   console.log("Server is running on " + config.port);
