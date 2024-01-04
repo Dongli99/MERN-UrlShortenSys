@@ -38,12 +38,10 @@ export const Navbar = () => {
           <TextLink onClick={handleSignOut}>Sign Out</TextLink>
         </FlexLine>
       ) : (
-        <Link
-          to={"/login"}
-          className="flex items-center text-xl gap-3 font-light"
-        >
-          <Hamburger />
-        </Link>
+        <FlexLine>
+          <TextLink to={"/login"}>LogIn</TextLink>
+          <TextLink to={"/signup"}>SignUp</TextLink>
+        </FlexLine>
       )}
     </nav>
   );
