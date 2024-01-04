@@ -40,11 +40,10 @@ app.get("/test", UrlPairController.redirectToOrigin);
 
 if (config.nodeEnv === "production") {
   console.log("Running production mode.");
-  const distPath = path.join(__dirname, "../client/dist");
-  app.use(express.static(distPath));
+  app.use(express.static(path.join(__dirname, "../client/dist")));
 
   app.get("*", (req, res) =>
-    res.sendFile(path.resolve(distPath, "index.html"))
+    res.sendFile(path.resolve(__dirname, "../", "client", "dist", "index.html"))
   );
 } else {
   app.get("/", (req, res) => res.send("Not on the production mode."));
