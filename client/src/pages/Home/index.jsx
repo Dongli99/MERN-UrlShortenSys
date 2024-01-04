@@ -19,6 +19,7 @@ export const Home = () => {
   const [originalUrl, setOriginalUrl] = useState("");
   const [alias, setAlias] = useState("");
   const [aliasErr, setAliasErr] = useState("");
+  const [aliasMsg, setAliasMsg] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const { user } = useContext(UserContext);
 
@@ -50,7 +51,8 @@ export const Home = () => {
           originalUrl: originalUrl,
           alias: alias,
         });
-        console.log(data.alias);
+        const msg = "Shortened URL: http://u.dongli.ca/" + data.alias;
+        setAliasMsg(msg);
       } catch (err) {
         console.log(err);
       }
@@ -85,6 +87,7 @@ export const Home = () => {
         </Button>
       </FlexLine>
       {aliasErr !== "" && <TextWarning message={aliasErr} />}
+      {aliasMsg !== "" && <TextWarning message={aliasMsg} />}
     </UssForm>
   );
 };

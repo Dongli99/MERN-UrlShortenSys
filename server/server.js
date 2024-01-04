@@ -35,7 +35,7 @@ connectDB();
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/uss", urlPairRouter);
-app.get("/test", async (req, req) => {
+app.get("/test", async (req, res) => {
   res.send("test ok");
 });
 
