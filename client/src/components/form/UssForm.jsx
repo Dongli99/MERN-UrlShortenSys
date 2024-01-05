@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { PrimaryTitle } from "../ui/PrimaryTitle";
 
 export const UssForm = ({ title, onSubmit, children, divStyle = "" }) => {
   return (
@@ -7,7 +8,7 @@ export const UssForm = ({ title, onSubmit, children, divStyle = "" }) => {
     p-8 rounded-xl shadow-lg ${divStyle}`}
     >
       <div>
-        <h2 className="text-center text-2xl font-extrabold">{title}</h2>
+        <PrimaryTitle title={title}></PrimaryTitle>
       </div>
       <form className="mt-8 space-y-6" onSubmit={onSubmit}>
         {children}
