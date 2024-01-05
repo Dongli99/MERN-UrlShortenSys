@@ -11,6 +11,7 @@ import urlPairRouter from "./routes/urlPair.routes.js";
 import UrlPairController from "./controllers/urlPair.controller.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import { ExceptionRoutes } from "./routes/exceptionRoutes.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
@@ -35,7 +36,7 @@ connectDB();
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/uss", urlPairRouter);
-app.get("/test", async (req, res) => {
+app.get("/test", (req, res) => {
   res.send("test ok");
 });
 
@@ -43,9 +44,15 @@ if (config.nodeEnv === "production") {
   console.log("Running production mode.");
   app.use(express.static(path.join(__dirname, "../client/dist")));
 
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "../", "client", "dist", "index.html"))
-  );
+  app.get("*", (req, res, next) => {
+    if (ExceptionRoutes.includes(req.url.substring(1))) {
+      res.sendFile(
+        path.resolve(__dirname, "../", "client", "dist", "index.html")
+      );
+    } else {
+      next();
+    }
+  });
 } else {
   app.get("/", (req, res) => res.send("Not on the production mode."));
 }

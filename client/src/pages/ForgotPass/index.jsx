@@ -14,7 +14,11 @@ export const ForgotPass = () => {
   };
 
   return (
-    <UssForm title="Forgot Password" onSubmit={handleForgotPass}>
+    <UssForm
+      title="Forgot Password"
+      onSubmit={handleForgotPass}
+      divStyle="max-w-lg"
+    >
       <FlexLine>Please enter your Email Address:</FlexLine>
       <EmailInput email={email} setEmail={setEmail} />
       <Button type="submit">Send Token</Button>
