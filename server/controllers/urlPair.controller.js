@@ -117,8 +117,8 @@ class UrlPairController {
   }
 
   static async redirectToOrigin(req, res) {
-    // const { alias } = req.params;
     const ip = req.ip;
+    const { alias } = req.params;
     let city = "",
       region = "",
       country = "";
@@ -129,7 +129,6 @@ class UrlPairController {
       country = location?.country || "";
     }
     try {
-      const { alias } = req.params;
       const urlPair = await UrlPair.findOne({ alias });
       if (urlPair && urlPair.originalUrl) {
         res.redirect(urlPair.originalUrl);
