@@ -128,9 +128,17 @@ class UrlPairController {
       region = location?.region || "";
       country = location?.country || "";
     }
-    const { alias } = req.params;
-    const { originalUrl } = await UrlPair.findOne({ alias });
-    res.redirect(originalUrl);
+    try {
+      const { alias } = req.params;
+      const urlPair = await UrlPair.findOne({ alias });
+      if (urlPair && urlPair.originalUrl) {
+        res.redirect(urlPair.originalUrl);
+      } else {
+        res.redirect("/aliasnotfound");
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 }
 

@@ -14,6 +14,7 @@ import { About } from "./pages/About/index";
 import { Layout } from "./layout/Layout";
 import { ForgotPass } from "./pages/ForgotPass";
 import { UserContextProvider } from "./contexts/UserContext";
+import { AliasNotFound } from "./pages/AliasNotFound/AliasNotFound";
 
 function App() {
   const router = createBrowserRouter(
@@ -25,6 +26,7 @@ function App() {
         <Route path="/myurl" element={<MyURL />} />
         <Route path="/about" element={<About />} />
         <Route path="/forgotpass" element={<ForgotPass />} />
+        <Route path="/aliasnotfound" element={<AliasNotFound />} />
       </Route>
     )
   );

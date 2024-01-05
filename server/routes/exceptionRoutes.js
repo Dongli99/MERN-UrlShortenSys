@@ -4,4 +4,5 @@ export const ExceptionRoutes = [
   "login",
   "myurl",
   "about",
+  "aliasnotfound",
 ];
