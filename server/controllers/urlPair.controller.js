@@ -125,7 +125,7 @@ class UrlPairController {
       const urlPair = await UrlPair.findOne({ alias });
       if (urlPair && urlPair.originalUrl) {
         // record the click
-        console.log(ip);
+        console.log(`City: ${city}, Region: ${region}, Country: ${country}`);
         // redirect to original URL
         res.redirect(urlPair.originalUrl);
       } else {
