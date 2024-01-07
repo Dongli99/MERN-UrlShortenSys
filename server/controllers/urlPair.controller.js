@@ -21,6 +21,7 @@ class UrlPairController {
         userId: userId,
         originalUrl,
         alias: alias || (await CurrAliasController.updateCurrAlias()),
+        // set customized alias, or generate an alias.
       });
       const savedUrlPair = await newUrlPair.save();
       res.status(201).json(savedUrlPair);
@@ -76,7 +77,7 @@ class UrlPairController {
    * @param {Object} res - Express response object
    * @returns {Object} - Updated URL Pair
    */
-  static async updateUrlPair(req, res) {
+  static async updateUrlPairAlias(req, res) {
     try {
       const { alias } = req.params;
       const updatedUrlPair = await UrlPair.findOneAndUpdate(
@@ -117,15 +118,20 @@ class UrlPairController {
   }
 
   static async redirectToOrigin(req, res) {
+    const { alias } = req.params;
+    const ip = req.headers["x-real-ip"];
+    const { city, region, country } = GeoLocationService.getGeolocationInfo(ip);
+
     try {
-      const { alias } = req.params;
-      const ip = req.headers["x-real-ip"];
-      const { city, region, country } =
-        GeoLocationService.getGeolocationInfo(ip);
       const urlPair = await UrlPair.findOne({ alias });
+
       if (urlPair && urlPair.originalUrl) {
         // record the click
-        console.log(`City: ${city}, Region: ${region}, Country: ${country}`);
+        urlPair.clicks.push({
+          timeStamp: new Date(),
+          geoLocation: { city, region, country },
+        });
+        await urlPair.save();
         // redirect to original URL
         res.redirect(urlPair.originalUrl);
       } else {
@@ -134,12 +140,6 @@ class UrlPairController {
     } catch (error) {
       throw error;
     }
-  }
-
-  static async recordClick(req, res) {
-    const ip = req.ip;
-    const { city, region, country } = GeoLocationService.getGeolocationInfo(ip);
-    console.log(ip);
   }
 }
 

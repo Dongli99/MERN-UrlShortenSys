@@ -4,7 +4,10 @@ const urlPairRouter = express.Router();
 
 urlPairRouter.post("/createUrlPair", UrlPairController.createUrlPair);
 urlPairRouter.get("/getUrlPair/:alias", UrlPairController.getUrlPair);
-urlPairRouter.put("/updateUrlPair/:alias", UrlPairController.updateUrlPair);
+urlPairRouter.put(
+  "/updateUrlPair/:alias",
+  UrlPairController.updateUrlPairAlias
+);
 urlPairRouter.delete("/deleteUrlPair/:alias", UrlPairController.deleteUrlPair);
 
 export default urlPairRouter;
