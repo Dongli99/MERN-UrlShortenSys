@@ -119,7 +119,7 @@ class UrlPairController {
   static async redirectToOrigin(req, res) {
     try {
       const { alias } = req.params;
-      const ip = req.ip;
+      const ip = req.headers["x-real-ip"];
       const { city, region, country } =
         GeoLocationService.getGeolocationInfo(ip);
       const urlPair = await UrlPair.findOne({ alias });
