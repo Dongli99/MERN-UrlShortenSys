@@ -63,7 +63,7 @@ class UserController {
         res.json(user);
       });
     } else {
-      res.json("not token");
+      res.json("no token");
     }
   }
 

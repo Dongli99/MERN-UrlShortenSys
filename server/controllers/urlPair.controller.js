@@ -1,7 +1,7 @@
 import UrlPair from "../models/urlPair.model.js";
+import GeoLocationService from "../services/GeoLocationService.js";
 import CurrAliasController from "./currAlias.controller.js";
 import UserController from "./user.controller.js";
-import geoip from "geoip-lite";
 
 /**
  * @class
@@ -117,20 +117,16 @@ class UrlPairController {
   }
 
   static async redirectToOrigin(req, res) {
-    const ip = req.ip;
-    const { alias } = req.params;
-    let city = "",
-      region = "",
-      country = "";
-    if (ip || ip !== "::1") {
-      const location = geoip.lookup(ip);
-      city = location?.city || "";
-      region = location?.region || "";
-      country = location?.country || "";
-    }
     try {
+      const { alias } = req.params;
+      const ip = req.ip;
+      const { city, region, country } =
+        GeoLocationService.getGeolocationInfo(ip);
       const urlPair = await UrlPair.findOne({ alias });
       if (urlPair && urlPair.originalUrl) {
+        // record the click
+        console.log(ip);
+        // redirect to original URL
         res.redirect(urlPair.originalUrl);
       } else {
         res.redirect("/aliasnotfound");
@@ -138,6 +134,12 @@ class UrlPairController {
     } catch (error) {
       throw error;
     }
+  }
+
+  static async recordClick(req, res) {
+    const ip = req.ip;
+    const { city, region, country } = GeoLocationService.getGeolocationInfo(ip);
+    console.log(ip);
   }
 }
 
