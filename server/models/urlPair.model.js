@@ -14,6 +14,12 @@ const GeoLocationSchema = new Schema({
   city: String,
 });
 
+const DeviceInfoSchema = new Schema({
+  device: String,
+  os: String,
+  browser: String,
+});
+
 /**
  * @description Represents a click with timestamp and geo-location information
  * @typedef {Object} Click
@@ -23,6 +29,7 @@ const GeoLocationSchema = new Schema({
 const ClickSchema = new Schema({
   timeStamp: { type: Date, default: Date.now },
   geoLocation: GeoLocationSchema,
+  deviceInfo: DeviceInfoSchema,
 });
 
 /**
@@ -52,12 +59,13 @@ const UrlPairSchema = new Schema({
   clicks: [ClickSchema], // Array of click information
 });
 
-UrlPairSchema.index({ expireAt: 1 }, { expireAfterSeconds: 1800 }); // Set up expiration for the URL Pair
+UrlPairSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 }); // Set up expiration for the URL Pair
 UrlPairSchema.index({
+  "clicks.timeStamp": 1,
   "clicks.geoLocation.country": 1,
   "clicks.geoLocation.region": 1,
-}); // Index for fast retrieval based on geo-location
-UrlPairSchema.index({ "clicks.timeStamp": 1 }); // Index for fast retrieval based on timestamp
+  "clicks.deviceInfo.os": 1,
+}); // Index for fast retrieval
 
 UrlPairSchema.pre("save", function (next) {
   this.modifiedAt = Date.now();

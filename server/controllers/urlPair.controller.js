@@ -1,5 +1,5 @@
 import UrlPair from "../models/urlPair.model.js";
-import GeoLocationService from "../services/GeoLocationService.js";
+import ClickInfoService from "../services/ClickInfoService.js";
 import CurrAliasController from "./currAlias.controller.js";
 import UserController from "./user.controller.js";
 
@@ -119,17 +119,16 @@ class UrlPairController {
 
   static async redirectToOrigin(req, res) {
     const { alias } = req.params;
-    const ip = req.headers["x-real-ip"];
-    const { city, region, country } = GeoLocationService.getGeolocationInfo(ip);
-
+    const { city, region, country } = ClickInfoService.getGeolocationInfo(req);
+    const { device, os, browser } = ClickInfoService.getDeviceInfo(req);
     try {
       const urlPair = await UrlPair.findOne({ alias });
-
       if (urlPair && urlPair.originalUrl) {
         // record the click
         urlPair.clicks.push({
           timeStamp: new Date(),
           geoLocation: { city, region, country },
+          deviceInfo: { device, os, browser },
         });
         await urlPair.save();
         // redirect to original URL

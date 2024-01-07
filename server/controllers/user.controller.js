@@ -84,7 +84,8 @@ class UserController {
   static async deleteUser(req, res) {}
 
   static async sanitizeUser(user) {
-    const { password, ...sanitizedUser } = user.toObject();
+    // avoid sensitive and unnecessary info
+    const { password, __v, ...sanitizedUser } = user.toObject();
     return sanitizedUser;
   }
 }
