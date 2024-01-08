@@ -1,16 +1,32 @@
+/**
+ * @fileoverview Module for connecting to the MongoDB database.
+ * @module server/config/connectDB
+ */
+
 import mongoose from "mongoose";
 import config from "./config.js";
 
+/**
+ * @description Establishes a connection to the MongoDB database.
+ * @function
+ * @async
+ * @throws {Error} If the DB_URI is not defined.
+ */
 const connectDB = async () => {
   try {
+    // Check if the DB_URI is defined
     if (!config.dbURI) {
-      //If uri is not defined, exit.
       console.error("DB_URI is not defined in the environment.");
       process.exit(1);
     }
+
+    // Connect to the MongoDB database
     await mongoose.connect(config.dbURI);
-    // show connection status
+
+    // Show connection status
     console.log("DB connected.");
+
+    // Event listeners for connection status
     mongoose.connection.on("connected", () => {
       console.log("Mongoose connected to Database.");
     });

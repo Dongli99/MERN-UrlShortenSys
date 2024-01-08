@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Mongoose model for URL pair data.
+ */
+
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
@@ -14,6 +18,13 @@ const GeoLocationSchema = new Schema({
   city: String,
 });
 
+/**
+ * @description Represents device information with device, operating system, and browser details
+ * @typedef {Object} DeviceInfo
+ * @property {String} device - Device name
+ * @property {String} os - Operating system
+ * @property {String} browser - Web browser
+ */
 const DeviceInfoSchema = new Schema({
   device: String,
   os: String,
@@ -25,6 +36,7 @@ const DeviceInfoSchema = new Schema({
  * @typedef {Object} Click
  * @property {Date} timeStamp - Timestamp of the click
  * @property {GeoLocation} geoLocation - Geo-location information of the click
+ * @property {DeviceInfo} deviceInfo - Device information of the click
  */
 const ClickSchema = new Schema({
   timeStamp: { type: Date, default: Date.now },
@@ -59,7 +71,10 @@ const UrlPairSchema = new Schema({
   clicks: [ClickSchema], // Array of click information
 });
 
+// Set up expiration for the URL Pair based on 'expireAt' field
 UrlPairSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 }); // Set up expiration for the URL Pair
+
+// Index for fast retrieval of clicks based on timestamp, geo-location, and device details
 UrlPairSchema.index({
   "clicks.timeStamp": 1,
   "clicks.geoLocation.country": 1,
@@ -67,11 +82,16 @@ UrlPairSchema.index({
   "clicks.deviceInfo.os": 1,
 }); // Index for fast retrieval
 
+// Pre-save hook to update 'modifiedAt' timestamp before saving
 UrlPairSchema.pre("save", function (next) {
   this.modifiedAt = Date.now();
   next();
 });
 
+/**
+ * @description Mongoose model for UrlPair.
+ * @type {mongoose.Model<UrlPair>}
+ */
 const UrlPair = mongoose.model("urlPair", UrlPairSchema);
 
 export default UrlPair;

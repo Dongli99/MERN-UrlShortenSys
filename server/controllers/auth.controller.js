@@ -1,9 +1,25 @@
+/**
+ * @fileoverview Controller for handling user authentication.
+ * @module AuthController
+ */
+
 import UserController from "./user.controller.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import TokenService from "../services/TokenService.js";
 
+/**
+ * @class
+ * @classdesc Controller for handling user authentication.
+ * @exports AuthController
+ */
 class AuthController {
+  /**
+   * @description Sign up a new user.
+   * @param {Object} req - Express request object.
+   * @param {Object} res - Express response object.
+   * @returns {Object} - JSON object containing user information.
+   * @throws {Error} If there is an issue creating the user.
+   */
   static async signupUser(req, res) {
     try {
       const user = await UserController.createUser(req, res);
@@ -13,6 +29,12 @@ class AuthController {
     }
   }
 
+  /**
+   * @description Log in a user and generate an authentication token.
+   * @param {Object} req - Express request object.
+   * @param {Object} res - Express response object.
+   * @returns {Object} - JSON object containing user information.
+   */
   static async loginUser(req, res) {
     try {
       const { email, password } = req.body;
@@ -32,14 +54,24 @@ class AuthController {
     }
   }
 
-  static async logoutUser(req, res) {}
-
+  /**
+   * @description Reset user password.
+   */
   static async resetPassword(req, res) {}
 
+  /**
+   * @description Verify user email.
+   */
   static async verifyEmail(req, res) {}
 
+  /**
+   * @description Refresh authentication token.
+   */
   static async refreshToken(req, res) {}
 
+  /**
+   * @description Revoke user token.
+   */
   static async revokeToken(req, res) {}
 }
 

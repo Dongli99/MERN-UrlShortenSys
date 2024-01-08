@@ -1,7 +1,22 @@
+/**
+ * @fileoverview Service for retrieving geolocation and device information from user requests.
+ * @module ClickInfoService
+ */
+
 import geoip from "geoip-lite";
 import parser from "ua-parser-js";
 
+/**
+ * @class
+ * @classdesc Service for retrieving geolocation and device information.
+ * @exports ClickInfoService
+ */
 class ClickInfoService {
+  /**
+   * @description Gets geolocation information based on the user's IP address.
+   * @param {Object} req - Express request object.
+   * @returns {Object} - Object containing city, region, and country.
+   */
   static getGeolocationInfo(req) {
     // translate ip into geolocation info
     const ip = req.headers["x-real-ip"];
@@ -17,6 +32,11 @@ class ClickInfoService {
     return { city, region, country };
   }
 
+  /**
+   * @description Gets device information based on the user agent.
+   * @param {Object} req - Express request object.
+   * @returns {Object} - Object containing device, OS, and browser information.
+   */
   static getDeviceInfo(req) {
     // retrieve device info from user agent
     let device = "",

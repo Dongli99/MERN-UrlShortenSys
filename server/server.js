@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Server file for the USS web application.
+ * @module server
+ */
+
 "use strict";
 
 import express, { json } from "express";
@@ -12,10 +17,15 @@ import UrlPairController from "./controllers/urlPair.controller.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { ExceptionRoutes } from "./routes/exceptionRoutes.js";
+
+// Use Node.js's __dirname in ESM
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
+/**
+ * @description Configuration for development and production modes.
+ */
 if (config.nodeEnv === "development") {
   console.log("Running development mode.");
   const corsOptions = {
@@ -31,8 +41,10 @@ if (config.nodeEnv === "development") {
 app.use(express.json());
 app.use(CookieParser());
 
+// Connect to the MongoDB database
 connectDB();
 
+// Define routes
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/uss", urlPairRouter);
@@ -40,6 +52,12 @@ app.get("/test", (req, res) => {
   res.send("test ok");
 });
 
+/**
+ * @description Serve static files in production mode.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @param {Function} next - Express next middleware function.
+ */
 if (config.nodeEnv === "production") {
   console.log("Running production mode.");
   app.use(express.static(path.join(__dirname, "../client/dist")));
@@ -57,8 +75,14 @@ if (config.nodeEnv === "production") {
   app.get("/", (req, res) => res.send("Not on the production mode."));
 }
 
+/**
+ * @description Redirect to the original URL based on the alias.
+ */
 app.get("/:alias", UrlPairController.redirectToOrigin);
 
+/**
+ * @description Start the server.
+ */
 app.listen(config.port, () => {
   console.log("Server is running on " + config.port);
 });

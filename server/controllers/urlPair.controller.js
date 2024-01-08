@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Controller for managing URL Pairs
+ * @module UrlPairController
+ */
+
 import UrlPair from "../models/urlPair.model.js";
 import ClickInfoService from "../services/ClickInfoService.js";
 import CurrAliasController from "./currAlias.controller.js";
@@ -6,10 +11,11 @@ import UserController from "./user.controller.js";
 /**
  * @class
  * @classdesc Controller for managing URL Pairs
+ * @exports UrlPairController
  */
 class UrlPairController {
   /**
-   * Create a new URL Pair
+   * @description Create a new URL Pair
    * @param {Object} req - Express request object
    * @param {Object} res - Express response object
    * @returns {Object} - Created URL Pair
@@ -35,7 +41,7 @@ class UrlPairController {
   }
 
   /**
-   * Get all URL Pairs
+   * @description Get all URL Pairs
    * @param {Object} req - Express request object
    * @param {Object} res - Express response object
    * @returns {Object[]} - Array of URL Pairs
@@ -51,7 +57,7 @@ class UrlPairController {
   }
 
   /**
-   * Get a specific URL Pair by alias
+   * @description Get a specific URL Pair by alias
    * @param {Object} req - Express request object
    * @param {Object} res - Express response object
    * @returns {Object} - URL Pair
@@ -72,7 +78,7 @@ class UrlPairController {
   }
 
   /**
-   * Update a URL Pair by alias
+   * @description Update a URL Pair by alias
    * @param {Object} req - Express request object
    * @param {Object} res - Express response object
    * @returns {Object} - Updated URL Pair
@@ -97,7 +103,7 @@ class UrlPairController {
   }
 
   /**
-   * Delete a URL Pair by alias
+   * @description Delete a URL Pair by alias
    * @param {Object} req - Express request object
    * @param {Object} res - Express response object
    * @returns {Object} - Deleted URL Pair
@@ -117,6 +123,12 @@ class UrlPairController {
     }
   }
 
+  /**
+   * @description Redirect to the original URL based on the provided alias
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {void}
+   */
   static async redirectToOrigin(req, res) {
     const { alias } = req.params;
     const { city, region, country } = ClickInfoService.getGeolocationInfo(req);
