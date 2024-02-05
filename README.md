@@ -135,4 +135,10 @@ flowchart LR
 
 ### Analyze Clicks
 
+#### Capture Click Data (Done)
+
+![alt text](image.png)
+
+#### Develop Dashboard
+
 ==🚧===🚧==

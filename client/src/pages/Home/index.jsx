@@ -51,7 +51,7 @@ export const Home = () => {
           originalUrl: originalUrl,
           alias: alias,
         });
-        const msg = "Shortened URL: http://u.dongli.ca/" + data.alias;
+        const msg = "Shortened URL: https://u.dongli.ca/" + data.alias;
         setAliasMsg(msg);
       } catch (err) {
         console.log(err);
