@@ -1,3 +1,7 @@
+/* 
+   This CSS file imports styles from Tailwind CSS to style the application.
+   It includes base styles, component styles, and utility styles.
+*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -11,12 +11,20 @@ import { useNavigate } from "react-router-dom";
 import { fetchProfile } from "../../utils/fetchProfile";
 import { UserContext } from "../../contexts/UserContext";
 
+/**
+ * LogIn component for user authentication.
+ * @returns {JSX.Element} - Rendered LogIn component.
+ */
 export const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  /**
+   * Handles the login form submission.
+   * @param {Object} e - Event object.
+   */
   const handleLogin = async (e) => {
     e.preventDefault();
     try {

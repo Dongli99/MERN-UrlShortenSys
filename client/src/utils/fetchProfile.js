@@ -1,8 +1,10 @@
 import { axiosInstance } from "../services/axios";
 
-// A additional utils function can be explicitly called from pages
-// to ensure the userContext being called immediately.
-
+/**
+ * Fetches the user profile from the server.
+ * @param {function} setUser - A function to update the user state with fetched data.
+ * @returns {Promise<void>} A promise that resolves when the profile is fetched and updated.
+ */
 export const fetchProfile = async (setUser) => {
   try {
     const response = await axiosInstance.get("/api/user/profile");

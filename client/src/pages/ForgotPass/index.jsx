@@ -4,8 +4,17 @@ import { EmailInput } from "../../components/form/EmailInput";
 import { FlexLine } from "../../components/ui/FlexLine";
 import { Button } from "../../components/ui/Button";
 
+/**
+ * ForgotPass component for password recovery.
+ * @returns {JSX.Element} - Rendered ForgotPass component.
+ */
 export const ForgotPass = () => {
   const [email, setEmail] = useState("");
+
+  /**
+   * Function to handle password recovery process.
+   * @param {Event} e - The form submit event.
+   */
   const handleForgotPass = (e) => {
     e.preventDefault();
     // check email matching account;

@@ -1,3 +1,9 @@
+/**
+ * Avatar component for rendering an avatar icon.
+ * @module Avatar
+ * @returns {JSX.Element} The SVG element representing the avatar icon.
+ */
+
 export const Avatar = () => {
   return (
     <svg

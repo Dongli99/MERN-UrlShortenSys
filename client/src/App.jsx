@@ -1,3 +1,8 @@
+/**
+ * Main application component.
+ * @module App
+ */
+
 import React from "react";
 import "./App.css";
 import {
@@ -16,7 +21,14 @@ import { ForgotPass } from "./pages/ForgotPass";
 import { UserContextProvider } from "./contexts/UserContext";
 import { AliasNotFound } from "./pages/AliasNotFound/AliasNotFound";
 
+/**
+ * Main application component.
+ * @returns {JSX.Element} The JSX element representing the main application component.
+ */
 function App() {
+  /**
+   * Create browser router with routes.
+   */
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
@@ -31,6 +43,10 @@ function App() {
     )
   );
 
+  /**
+   * Render the main application.
+   * @returns {JSX.Element} The JSX element representing the main application.
+   */
   return (
     <div className="App">
       <UserContextProvider>

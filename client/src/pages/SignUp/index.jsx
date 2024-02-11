@@ -12,6 +12,10 @@ import { NameInput } from "../../components/form/NameInput";
 import { FlexLine } from "../../components/ui/FlexLine";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * SignUp component for user registration.
+ * @returns {JSX.Element} - Rendered SignUp component.
+ */
 export const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -21,6 +25,10 @@ export const SignUp = () => {
   const [passMatch, setPassMatch] = useState(true);
   const navigate = useNavigate();
 
+  /**
+   * Function to register a new user.
+   * @param {Event} e - The form submit event.
+   */
   const registerUser = async (e) => {
     e.preventDefault();
     handleConfirmPass();
@@ -40,6 +48,9 @@ export const SignUp = () => {
     }
   };
 
+  /**
+   * Function to check if password matches confirm password.
+   */
   const handleConfirmPass = async () => {
     setPassMatch(password === confirmPass);
   };

@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import ErrorImage from "../../assets/error_img.jpg";
 
+/**
+ * AliasNotFound component to display when a shortened URL is not found.
+ * @returns {JSX.Element} - Rendered AliasNotFound component.
+ */
 export const AliasNotFound = () => {
   return (
     <div className="flex flex-col items-center justify-center space-y-8">

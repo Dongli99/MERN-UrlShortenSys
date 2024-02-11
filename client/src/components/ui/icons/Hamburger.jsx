@@ -1,3 +1,9 @@
+/**
+ * Hamburger component for rendering a hamburger icon.
+ * @module Hamburger
+ * @returns {JSX.Element} The SVG element representing the hamburger icon.
+ */
+
 export const Hamburger = () => {
   return (
     <svg
