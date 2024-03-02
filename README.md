@@ -15,7 +15,7 @@ This project aim to practice courses Software System Design and Web Application 
 
 The developing version has been deployed on <https://u.dongli.ca>, please expect  occasional instability.
 
-_To manage his time effectively, the author **paused** the project and delved into exploring other areas of technology._
+_To manage his time effectively, the author **paused** the project and delved into other areas of technology._
 
 ## Current File Structure
 
