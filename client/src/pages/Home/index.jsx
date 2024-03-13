@@ -9,6 +9,7 @@ import { axiosInstance } from "../../services/axios";
 import { aliasPattern } from "../../utils/validationPatterns";
 import { TextWarning } from "../../components/ui/TextWarning";
 import { UserContext } from "../../contexts/UserContext";
+import { isUrlReachable } from "../../services/urlUtils";
 
 /**
  * Home component for shortening URLs.
@@ -38,6 +39,11 @@ export const Home = () => {
 
   const handleClickGenButton = async (e) => {
     e.preventDefault();
+    let validLongUrl = await isUrlReachable(originalUrl);
+    if (!validLongUrl) {
+      alert("The long URL cannot be reached.");
+      return;
+    }
     if (isChecked && aliasErr !== "") {
       alert("Please input valid alias, or uncheck customize option.");
       return;
