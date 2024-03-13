@@ -1,15 +1,14 @@
-import { OriginalUrlInput } from "./OriginalUrlInput";
-import { UssForm } from "../../components/form/UssForm";
-import { FlexLine } from "../../components/ui/FlexLine";
 import { useContext, useState } from "react";
-import { AliasInput } from "./AliasInput";
-import { Button } from "../../components/ui/Button";
 import { Checkbox } from "../../components/form/CheckBox";
-import { axiosInstance } from "../../services/axios";
-import { aliasPattern } from "../../utils/validationPatterns";
+import { UssForm } from "../../components/form/UssForm";
+import { Button } from "../../components/ui/Button";
+import { FlexLine } from "../../components/ui/FlexLine";
 import { TextWarning } from "../../components/ui/TextWarning";
 import { UserContext } from "../../contexts/UserContext";
-import { isUrlReachable } from "../../services/urlUtils";
+import { axiosInstance } from "../../services/axios";
+import { aliasPattern } from "../../utils/validationPatterns";
+import { AliasInput } from "./AliasInput";
+import { OriginalUrlInput } from "./OriginalUrlInput";
 
 /**
  * Home component for shortening URLs.
@@ -22,6 +21,7 @@ export const Home = () => {
   const [aliasErr, setAliasErr] = useState("");
   const [aliasMsg, setAliasMsg] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [isReachable, setIsReachable] = useState(false);
   const { user } = useContext(UserContext);
 
   const handleCheckboxChange = () => {
@@ -37,10 +37,23 @@ export const Home = () => {
     }
   };
 
+  const checkOriginalUrlReachability = async () => {
+    try {
+      const response = await fetch(originalUrl);
+      if (response.ok) {
+        setIsReachable(true);
+      } else {
+        setIsReachable(false);
+      }
+    } catch (error) {
+      setIsReachable(false);
+    }
+  };
+
   const handleClickGenButton = async (e) => {
     e.preventDefault();
-    let validLongUrl = await isUrlReachable(originalUrl);
-    if (!validLongUrl) {
+    checkOriginalUrlReachability();
+    if (!isReachable) {
       alert("The long URL cannot be reached.");
       return;
     }
